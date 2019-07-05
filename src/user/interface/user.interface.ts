@@ -1,5 +1,5 @@
 
-export interface Element {
+export interface User {
   specversion: string; //
   type: string;
   source: string;

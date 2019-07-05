@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
-import { BenchmarkModule } from './benchmark/benchmark.module';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
-    BenchmarkModule,
+    UserModule,
   ],
 })
 export class AppModule {}
