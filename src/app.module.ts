@@ -5,9 +5,7 @@ import { MONGO_DB_SERVER } from './config';
 
 @Module({
   imports: [
-    MongooseModule.forRoot(MONGO_DB_SERVER, {
-      useNewUrlParser: true,
-    }),
+    MongooseModule.forRoot(MONGO_DB_SERVER, {useNewUrlParser: true}),
     UserModule,
   ],
 })
