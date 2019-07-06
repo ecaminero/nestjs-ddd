@@ -1,8 +1,12 @@
-
 import * as mongoose from 'mongoose';
 
-export const CatSchema = new mongoose.Schema({
+export const UserSchema = new mongoose.Schema({
   name: String,
+  lastname: String,
   age: Number,
-  breed: String,
+  picture: String,
+  company: String,
+  email: String,
+  phone: String,
+  balance: String,
 });

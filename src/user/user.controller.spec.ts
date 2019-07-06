@@ -1,22 +1,28 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { UserController } from './user.controller';
-import { UserService } from './user.service';
+import * as faker from 'faker';
 
 describe('AppController', () => {
-  let userController: UserController;
 
   beforeEach(async () => {
     const app: TestingModule = await Test.createTestingModule({
-      controllers: [UserController],
-      providers: [UserService],
+      controllers: [],
+      providers: [],
     }).compile();
-
-    userController = app.get<UserController>(UserController);
   });
 
   describe('root', () => {
     it('should return "Hello World!"', () => {
-      expect(userController.getHello()).toBe('Hello World!');
+      const user = {
+        name: faker.name.findName(),
+        lastname: faker.name.lastName(),
+        age: faker.random.number(),
+        picture: faker.image.imageUrl(),
+        company: faker.company.companyName(),
+        email: faker.internet.email(),
+        phone: faker.phone.phoneNumber(),
+        balance: faker.finance.amount(),
+      };
+      console.log(user);
     });
   });
 });
