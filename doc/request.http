@@ -1,7 +1,11 @@
-
+@hostname = localhost
+@port = 4000
+@host = {{hostname}}:{{port}}
+@contentType = application/json
 
 ### Create Uuser
-POST http://localhost:4000/ HTTP/1.1
+POST http://{{host}} HTTP/1.1
+Content-Type: {{contentType}}
 
 { 
   "name": "Waldo Daniel",
