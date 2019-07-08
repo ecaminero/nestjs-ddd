@@ -1,29 +1,40 @@
 import { Test } from '@nestjs/testing';
+import { Model } from 'mongoose';
 import { getModelToken } from '@nestjs/mongoose';
 import { TestingModule } from '@nestjs/testing/testing-module';
 import { UserController } from './../user.controller';
 import { UserService } from './../user.service';
-import { userProviders } from './../user.provider';
+import { mockooseProviders } from './../../database/mockoose.providers';
 import { DatabaseModule } from './../../database/database.module';
+import { User } from './../interfaces/user.interface';
+import { UserEntity } from './../entities/user.entity'
 
 describe('User Controller', () => {
   let controller: UserController;
   let service: UserService;
+  let userModel: Model<User>;
+  const token = getModelToken(UserEntity);
+
+  const DatabaseProvider = {
+    provide: token,
+    useFactory: async connection => connection.model('User', UserEntity),
+    useValue: userModel,
+    inject: ['MOCK_DATABASE_CONNECTION'],
+  }
 
   beforeAll(async () => {
-    const mod: TestingModule = await Test
+    const module: TestingModule = await Test
       .createTestingModule({
-        imports: [DatabaseModule],
         controllers: [UserController],
         providers: [
-          UserService,
-          ...userProviders
+          ...mockooseProviders,
+          UserService
         ],
       })
       .compile();
 
-    controller = mod.get<UserController>(UserController);
-    service = mod.get<UserService>(UserService);
+    controller = module.get<UserController>(UserController);
+    service = module.get<UserService>(UserService);
   });
 
   it('should be true', () => {

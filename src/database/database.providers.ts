@@ -1,4 +1,5 @@
 import * as mongoose from 'mongoose';
+import { Mockgoose } from 'mockgoose-fix';
 import { DB_SERVER } from './../config';
 
 export const databaseProviders = [{
