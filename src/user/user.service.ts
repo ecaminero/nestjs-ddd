@@ -2,10 +2,11 @@ import { Injectable, Inject } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { User } from './interfaces/user.interface';
 import { CreateUserDto } from './dto/create-user.dto';
+import { USER_MODEL_PROVIDER } from '../constants';
 
 @Injectable()
 export class UserService {
-  constructor(@Inject('USER_MODEL') private readonly userModel: Model<User>) {}
+  constructor(@Inject(USER_MODEL_PROVIDER) private readonly userModel: Model<User>) {}
 
   getHello(): string {
     return 'Hello World!';
