@@ -7,7 +7,6 @@ import { UserService } from './../user.service';
 import { User } from './../interfaces/user.interface';
 import { UserEntity } from './../entities/user.entity';
 import { USER_MODEL_PROVIDER } from './../../constants';
-import { create } from 'lodash';
 
 describe('User Controller', () => {
   let service: UserService;
@@ -69,7 +68,7 @@ describe('User Controller', () => {
 
     console.log(userModel);
     // jest.spyOn(service, 'create').mockImplementation(async () => user );
-    const data = await service.create(user);
+    // const data = await service.create(user);
     // console.log(user);
 
   });
