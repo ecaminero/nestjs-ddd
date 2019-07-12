@@ -1,20 +1,21 @@
 import * as faker from 'faker';
+import * as uuid from 'uuid/v4';
 import { Test } from '@nestjs/testing';
-import { Model } from 'mongoose';
+import * as mongoose from 'mongoose';
 import { TestingModule } from '@nestjs/testing/testing-module';
-import { UserController } from './../user.controller';
 import { UserService } from './../user.service';
 import { User } from './../interfaces/user.interface';
 import { UserEntity } from './../entities/user.entity';
 import { USER_MODEL_PROVIDER } from './../../constants';
-import * as uuid from 'uuid/v4';
+import { create } from 'lodash';
 
 describe('User Controller', () => {
-  let controller: UserController;
   let service: UserService;
-  const userModel: Model<User> = UserEntity;
+  let userModel: mongoose.Model<User>;
 
   beforeAll(async () => {
+    userModel = UserEntity;
+
     const userProviders = {
       provide: USER_MODEL_PROVIDER,
       useValue: userModel,
@@ -22,7 +23,6 @@ describe('User Controller', () => {
 
     const module: TestingModule = await Test
       .createTestingModule({
-        controllers: [UserController],
         providers: [
           UserService,
           userProviders,
@@ -30,11 +30,51 @@ describe('User Controller', () => {
       })
       .compile();
 
-    controller = module.get<UserController>(UserController);
     service = module.get<UserService>(UserService);
   });
 
-  it('should get users', async () => {
+  fit('should create a user', async () => {
+    const user: User = {
+      name: faker.name.findName(),
+      lastname: faker.name.lastName(),
+      age: faker.random.number(),
+      picture: faker.image.imageUrl(),
+      company: faker.company.companyName(),
+      email: faker.internet.email(),
+      phone: faker.phone.phoneNumber(),
+      balance: faker.finance.amount(),
+      jobTitle: faker.name.jobTitle(),
+      avatar: faker.image.avatar(),
+      ipv6: faker.internet.ipv6(),
+      id: uuid(),
+      finance: {
+        account: faker.finance.account(),
+        accountName: faker.finance.accountName(),
+     },
+      address: {
+        zipCode: faker.address.zipCode(),
+        city: faker.address.city(),
+        streetAddress: faker.address.streetAddress(),
+        country: faker.address.country(),
+     },
+      shopping: [{
+        productName: faker.commerce.productName(),
+        price: faker.commerce.price(),
+        productAdjective: faker.commerce.productAdjective(),
+        productMaterial: faker.commerce.productMaterial(),
+        product: faker.commerce.product(),
+        department: faker.commerce.department(),
+      }],
+    };
+
+    console.log(userModel);
+    // jest.spyOn(service, 'create').mockImplementation(async () => user );
+    const data = await service.create(user);
+    // console.log(user);
+
+  });
+
+  it('should get all user users', async () => {
     const randomNumber = Math.floor(Math.random() * 10);
     const userList: User[] = [];
 
@@ -75,7 +115,7 @@ describe('User Controller', () => {
     };
 
     jest.spyOn(service, 'findAll').mockImplementation(async () => userList );
-    const data = await controller.findAll();
+    const data = await service.findAll();
     expect(data.length).toBe(userList.length);
     data.forEach((element, index) => {
       expect(element.id).toBe(userList[index].id);
