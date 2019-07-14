@@ -1,5 +1,5 @@
 import { Sequelize } from 'sequelize-typescript';
-import { User } from '../user/repository/user.repository';
+import { UserEntity } from '../user/entity/user.entity';
 import {
   DB_PROVIDER,
   DB_HOST,
@@ -23,7 +23,7 @@ export const databaseProviders = [{
         supportBigNumbers: true,
       },
     });
-    sequelize.addModels([User]);
+    sequelize.addModels([UserEntity]);
     await sequelize.sync();
     return sequelize;
   },

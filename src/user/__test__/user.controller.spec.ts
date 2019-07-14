@@ -5,7 +5,7 @@ import { TestingModule } from '@nestjs/testing/testing-module';
 import { UserController } from './../user.controller';
 import { UserService } from './../user.service';
 import { User } from './../interfaces/user.interface';
-import { UserEntity } from './../entities/user.entity';
+import { UserEntity } from '../entity/user.entity';
 import { USER_MODEL_PROVIDER } from './../../constants';
 import * as uuid from 'uuid/v4';
 

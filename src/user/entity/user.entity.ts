@@ -1,7 +1,7 @@
 import { Column, Model, Table, DataType } from 'sequelize-typescript';
 
 @Table
-export class User extends Model<User> {
+export class UserEntity extends Model<UserEntity> {
 
   @Column({type: DataType.UUID, primaryKey: true})
   // tslint:disable-next-line: variable-name
