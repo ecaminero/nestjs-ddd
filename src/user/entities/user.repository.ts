@@ -1,6 +1,11 @@
 import { Schema } from 'mongoose';
 
-export const UserEntity: Schema = new Schema({
+// export class UserRepository extends Schema {
+//   constructor(model: User) {
+//     super(model);
+//   }
+// }
+export const UserRepository = new Schema({
   name: String,
   lastname: String,
   age: Number,
