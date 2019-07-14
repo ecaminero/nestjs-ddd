@@ -1,0 +1,4 @@
+# https://docs.docker.com/samples/library/mysql
+docker run --name mysqll -e MYSQL_ROOT_PASSWORD=123456 -e MYSQL_USER=dev -e MYSQL_PASSWORD=dev -p 3306:3306  -d mysql
+
+docker run --name -p 27017:27017 mongo -d mongo

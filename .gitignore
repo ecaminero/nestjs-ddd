@@ -36,3 +36,8 @@ lerna-debug.log*
 
 # Env
 .env
+
+# Temp
+*.sqlite
+*.db
+127.0.0.1

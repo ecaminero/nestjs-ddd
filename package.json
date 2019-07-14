@@ -29,9 +29,13 @@
     "mockgoose-fix": "^7.3.6",
     "moment": "^2.24.0",
     "mongoose": "^5.6.4",
+    "mysql2": "^1.6.5",
     "reflect-metadata": "^0.1.12",
     "rimraf": "^2.6.2",
-    "rxjs": "^6.3.3"
+    "rxjs": "^6.3.3",
+    "sequelize": "^5.10.1",
+    "sequelize-typescript": "^0.6.11",
+    "sqlite3": "^4.0.9"
   },
   "devDependencies": {
     "@nestjs/testing": "^6.5.2",
@@ -41,6 +45,7 @@
     "@types/faker": "^4.1.5",
     "@types/jest": "^23.3.13",
     "@types/node": "^10.12.18",
+    "@types/sequelize": "^4.28.3",
     "@types/supertest": "^2.0.7",
     "concurrently": "^4.1.0",
     "faker": "^4.1.0",

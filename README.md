@@ -3,9 +3,13 @@
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 TODO: 
 Documentation in progress
+## Requirements
+
+```bash
+$ docker run --name mysql -e MYSQL_ROOT_PASSWORD=123456  -p 3306:3306  -d mysql
+```
 
 ## Installation
-
 ```bash
 $ npm install
 ```
