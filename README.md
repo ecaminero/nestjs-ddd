@@ -6,7 +6,11 @@ Documentation in progress
 ## Requirements
 
 ```bash
-$ docker run --name mysql -e MYSQL_ROOT_PASSWORD=123456  -p 3306:3306  -d mysql
+# Mysql
+docker run --name mysqll -e MYSQL_ROOT_PASSWORD=123456 -e MYSQL_USER=dev -e MYSQL_PASSWORD=dev -p 3306:3306  -d mysql
+
+# Mongo DB
+docker run --name -p 27017:27017 mongo -d mongo
 ```
 
 ## Installation
