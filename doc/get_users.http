@@ -1,0 +1,7 @@
+@hostname = localhost
+@port = 4000
+@host = {{hostname}}:{{port}}
+@contentType = application/json
+
+### Get all services
+GET  http://localhost:4000/all HTTP/1.1
