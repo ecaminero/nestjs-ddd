@@ -1,16 +1,19 @@
 import * as faker from 'faker';
 import * as uuid from 'uuid/v4';
+import { has } from 'lodash';
 import { Test } from '@nestjs/testing';
-import * as mongoose from 'mongoose';
+import { Model } from 'mongoose';
 import { TestingModule } from '@nestjs/testing/testing-module';
-import { UserService } from './../user.service';
-import { User } from './../interfaces/user.interface';
-import { UserEntity } from './../entities/user.entity';
-import { USER_MODEL_PROVIDER } from './../../constants';
+import { USER_MODEL_PROVIDER } from '../../constants';
+import { UserService } from '../user.service';
+import { User } from '../interfaces/user.interface';
+import { UserEntity } from '../entities/user.entity';
+import { UserRepository } from '../user.repository';
 
 describe('User Controller', () => {
   let service: UserService;
-  let userModel: mongoose.Model<User>;
+  let userModel: Model<User> = UserEntity;
+  let repository: UserRepository;
 
   beforeAll(async () => {
     userModel = UserEntity;
@@ -24,16 +27,19 @@ describe('User Controller', () => {
       .createTestingModule({
         providers: [
           UserService,
+          UserRepository,
           userProviders,
         ],
       })
       .compile();
 
     service = module.get<UserService>(UserService);
+    repository = module.get<UserRepository>(UserRepository);
   });
 
-  fit('should create a user', async () => {
+  it('should create a user', async () => {
     const user: User = {
+      id: uuid(),
       name: faker.name.findName(),
       lastname: faker.name.lastName(),
       age: faker.random.number(),
@@ -45,7 +51,6 @@ describe('User Controller', () => {
       jobTitle: faker.name.jobTitle(),
       avatar: faker.image.avatar(),
       ipv6: faker.internet.ipv6(),
-      id: uuid(),
       finance: {
         account: faker.finance.account(),
         accountName: faker.finance.accountName(),
@@ -66,11 +71,13 @@ describe('User Controller', () => {
       }],
     };
 
-    console.log(userModel);
-    // jest.spyOn(service, 'create').mockImplementation(async () => user );
-    // const data = await service.create(user);
-    // console.log(user);
-
+    jest.spyOn(repository, 'create').mockImplementation(async () => user );
+    const data = await service.create(user);
+    expect(has(data , 'id')).toBeTruthy();
+    expect(data.id).toBeDefined();
+    Object.keys(data).forEach((key) => {
+      expect(data[key]).toBe(user[key]);
+    });
   });
 
   it('should get all user users', async () => {
@@ -111,7 +118,7 @@ describe('User Controller', () => {
         }],
       };
       userList.push(result);
-    };
+    }
 
     jest.spyOn(service, 'findAll').mockImplementation(async () => userList );
     const data = await service.findAll();
@@ -121,4 +128,10 @@ describe('User Controller', () => {
     });
   });
 
+  it('should return Hello World!', async () => {
+
+    const data = await service.getHello();
+    expect(data).toBeDefined();
+    expect(data).toBe('Hello World!');
+  });
 });

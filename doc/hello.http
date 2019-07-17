@@ -4,4 +4,4 @@
 @contentType = application/json
 
 ### Create Uuser
-GET http://{{host}}/all HTTP/1.1
+GET http://{{host}}/hello HTTP/1.1
