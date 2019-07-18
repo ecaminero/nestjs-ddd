@@ -30,5 +30,4 @@ export interface User {
     product: string;
     department: string;
   }];
-  validate_age: () => {};
 }
