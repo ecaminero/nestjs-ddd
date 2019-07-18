@@ -1,37 +1,18 @@
-import { IsNotEmpty, IsString} from 'class-validator';
+import { IsNotEmpty, IsString, IsNumber} from 'class-validator';
+import { Shopping } from '../entity/shopping.entity';
+import { Adress } from '../entity/adress.entity';
+import { Finance } from '../entity/finance.entity';
+import { User } from '../entity/user.entity';
+import { Type } from 'class-transformer';
 
-export class CreateUserDto {
+export class CreateUserDto extends User {
 
-  @IsNotEmpty()
-  @IsString()
-  name: string;
-  lastname: string;
-  age: number;
-  picture: string;
-  company: string;
-  email: string;
-  phone: string;
-  balance: string;
-  jobTitle: string;
-  avatar: string;
-  ipv6: string;
-  id: string;
-  finance: {
-    account: string;
-    accountName: string;
-  };
-  address: {
-    zipCode: string;
-    city: string;
-    streetAddress: string;
-    country: string;
-  };
-  shopping: [{
-    productName: string;
-    price: string;
-    productAdjective: string;
-    productMaterial: string;
-    product: string;
-    department: string;
-  }];
+  @Type(() => Finance)
+  readonly finance: Finance;
+
+  @Type(() => Adress)
+  address: Adress;
+
+  @Type(() => Shopping)
+  shopping: [Shopping];
 }

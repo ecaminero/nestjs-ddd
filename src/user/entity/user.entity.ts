@@ -1,7 +1,14 @@
+import { IsNotEmpty, IsNumber, IsString} from 'class-validator';
 
-export interface User {
+export class User {
+
+  @IsString()
+  @IsNotEmpty()
   name: string;
   lastname: string;
+
+  @IsNumber()
+  @IsNotEmpty()
   age: number;
   picture: string;
   company: string;
@@ -12,22 +19,4 @@ export interface User {
   avatar: string;
   ipv6: string;
   id: string;
-  finance: {
-    account: string;
-    accountName: string;
-  };
-  address: {
-    zipCode: string;
-    city: string;
-    streetAddress: string;
-    country: string;
-  };
-  shopping: [{
-    productName: string;
-    price: string;
-    productAdjective: string;
-    productMaterial: string;
-    product: string;
-    department: string;
-  }];
 }
