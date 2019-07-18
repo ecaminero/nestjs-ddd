@@ -1,5 +1,5 @@
 import { Sequelize } from 'sequelize-typescript';
-import { UserEntity } from '../user/entity/user.entity';
+import { UserEntity } from '../user/model/user.model';
 import {
   DB_PROVIDER,
   DB_HOST,

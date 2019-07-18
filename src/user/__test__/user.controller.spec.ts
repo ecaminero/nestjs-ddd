@@ -2,10 +2,10 @@ import * as faker from 'faker';
 import { Test } from '@nestjs/testing';
 import { Model } from 'mongoose';
 import { TestingModule } from '@nestjs/testing/testing-module';
-import { UserController } from './../user.controller';
+import { UserController } from '../controller/user.controller';
 import { UserService } from './../user.service';
-import { User } from './../interfaces/user.interface';
-import { UserEntity } from '../entity/user.entity';
+import { User } from '../interface/user.entity';
+import { UserEntity } from '../model/user.model';
 import { USER_MODEL_PROVIDER } from './../../constants';
 import * as uuid from 'uuid/v4';
 

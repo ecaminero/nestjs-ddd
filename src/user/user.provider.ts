@@ -1,4 +1,4 @@
-import { UserEntity } from './entity/user.entity';
+import { UserEntity } from './model/user.model';
 import { USER_MODEL_PROVIDER } from '../constants';
 
 export const userProviders = [{
