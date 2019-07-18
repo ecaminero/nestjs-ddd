@@ -4,17 +4,17 @@ import { Test } from '@nestjs/testing';
 import { Model } from 'mongoose';
 import { has } from 'lodash';
 import { TestingModule } from '@nestjs/testing/testing-module';
-import { UserController } from './../user.controller';
+import { UserController } from '../controller/user.controller';
 import { UserService } from './../user.service';
-import { User } from './../interfaces/user.interface';
-import { UserEntity } from './../entities/user.entity';
+import { User } from '../entity/user.entity';
+import { UserModel } from '../model/user.model';
 import { USER_MODEL_PROVIDER } from './../../constants';
-import { UserRepository } from '../user.repository';
+import { UserRepository } from '../repository/user.repository';
 
 describe('User Controller', () => {
   let controller: UserController;
   let service: UserService;
-  const userModel: Model<User> = UserEntity;
+  const userModel: Model<User> = UserModel;
   const randomNumber = Math.floor(Math.random() * 10);
 
   beforeAll(async () => {

@@ -25,6 +25,8 @@
     "@nestjs/mongoose": "^6.1.2",
     "@nestjs/platform-express": "^6.5.2",
     "@types/uuid": "^3.4.5",
+    "class-transformer": "^0.2.3",
+    "class-validator": "^0.9.1",
     "dotenv": "^8.0.0",
     "lodash": "^4.17.14",
     "mockgoose-fix": "^7.3.6",

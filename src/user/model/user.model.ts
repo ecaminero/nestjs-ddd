@@ -1,6 +1,6 @@
 import { Schema } from 'mongoose';
 
-export const UserEntity = new Schema({
+export const UserModel = new Schema({
   name: String,
   lastname: String,
   age: Number,

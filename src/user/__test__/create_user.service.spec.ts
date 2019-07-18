@@ -6,9 +6,9 @@ import { Model } from 'mongoose';
 import { TestingModule } from '@nestjs/testing/testing-module';
 import { USER_MODEL_PROVIDER } from '../../constants';
 import { UserService } from '../user.service';
-import { User } from '../interfaces/user.interface';
-import { UserEntity } from '../entities/user.entity';
-import { UserRepository } from '../user.repository';
+import { User } from '../entity/user.entity';
+import { UserEntity } from '../model/user.model';
+import { UserRepository } from '../repository/user.repository';
 
 describe('User Controller', () => {
   let service: UserService;
