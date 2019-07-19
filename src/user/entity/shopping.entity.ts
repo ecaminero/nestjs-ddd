@@ -1,6 +1,6 @@
 
 export class Shopping {
-  id: string;
+  readonly id: string;
   productName: string;
   price: string;
   productAdjective: string;

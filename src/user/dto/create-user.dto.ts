@@ -6,13 +6,12 @@ import { User } from '../entity/user.entity';
 import { Type } from 'class-transformer';
 
 export class CreateUserDto extends User {
-
   @Type(() => Finance)
-  readonly finance: Finance;
+  finance: Finance;
 
   @Type(() => Adress)
   address: Adress;
 
-  @Type(() => Shopping)
+  @Type(() => Object)
   shopping: [Shopping];
 }
