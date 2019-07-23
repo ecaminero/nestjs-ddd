@@ -1,5 +1,7 @@
 import * as uuid from 'uuid/v4';
 import { Column, Model, Table, DataType, BeforeCreate } from 'sequelize-typescript';
+import { ForeignKey } from 'sequelize-typescript';
+import { UserModel } from './user.model';
 
 @Table
 export class AdressModel extends Model<AdressModel> {
@@ -19,6 +21,10 @@ export class AdressModel extends Model<AdressModel> {
 
   @Column
   country: string;
+
+  @ForeignKey(() => UserModel)
+  @Column({type: DataType.UUIDV4})
+  userId: string;
 
   @BeforeCreate
   static makeUpperCase(instance: AdressModel) {

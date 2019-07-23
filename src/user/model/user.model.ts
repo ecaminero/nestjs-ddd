@@ -1,6 +1,6 @@
 import * as uuid from 'uuid/v4';
 import { Column, Model, Table, DataType } from 'sequelize-typescript';
-import { ForeignKey, HasMany, BeforeCreate } from 'sequelize-typescript';
+import { HasOne, HasMany, BeforeCreate } from 'sequelize-typescript';
 import { AdressModel } from './address.model';
 import { ShoppingModel } from './shopping.model';
 
@@ -53,9 +53,8 @@ export class UserModel extends Model<UserModel> {
     accountName: string;
   };
 
-  @ForeignKey(() => AdressModel)
-  @Column({type: DataType.UUIDV4})
-  address: string;
+  @HasOne(() => AdressModel)
+  address: AdressModel;
 
   @HasMany(() => ShoppingModel)
   shoppings: ShoppingModel[];

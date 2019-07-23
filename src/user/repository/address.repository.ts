@@ -6,7 +6,7 @@ import { ADDRESS_MODEL_PROVIDER } from '../../constants';
 // Se inyecta el repo en el servicio
 @Injectable()
 export class AddressRepository {
-  constructor(@Inject(ADDRESS_MODEL_PROVIDER) private readonly model: Model<Address>) {}
+  constructor(@Inject(ADDRESS_MODEL_PROVIDER) readonly model: Model<Address>) {}
 
   async create(data: Address): Promise<Address> {
     const address = new this.model(data);

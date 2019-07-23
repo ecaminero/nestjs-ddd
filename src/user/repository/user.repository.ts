@@ -10,7 +10,7 @@ import { USER_MODEL_PROVIDER } from '../../constants';
 @Injectable()
 export class UserRepository {
   constructor(
-    @Inject(USER_MODEL_PROVIDER) private readonly model: Model<User>,
+    @Inject(USER_MODEL_PROVIDER) readonly model: Model<User>,
     private readonly addressRepository: AddressRepository,
     private readonly shoppingRepository: ShoppingRepository) {}
 
@@ -20,6 +20,7 @@ export class UserRepository {
 
     if (data.address) {
       const address = await this.addressRepository.create(data.address);
+      user.setAddress(address);
     }
     if (data.shopping) {
       const shopping = await this.shoppingRepository.create(data.shopping);
@@ -29,6 +30,12 @@ export class UserRepository {
   }
 
   async find(): Promise<User[]> {
-    return await this.model.findAll();
+    const allUser = this.model.findAll({
+      include: [
+        { model: this.shoppingRepository.model },
+        { model: this.addressRepository.model },
+      ],
+    });
+    return await allUser;
   }
 }

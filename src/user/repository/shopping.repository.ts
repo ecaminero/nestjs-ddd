@@ -7,7 +7,7 @@ import { SHOPPING_MODEL_PROVIDER } from '../../constants';
 // Se inyecta el repo en el servicio
 @Injectable()
 export class ShoppingRepository {
-  constructor(@Inject(SHOPPING_MODEL_PROVIDER) private readonly model: Model<Shopping>) {}
+  constructor(@Inject(SHOPPING_MODEL_PROVIDER) readonly model: Model<Shopping>) {}
 
   async create(data: Shopping | Shopping[]): Promise<any[]> {
     data = isArray(data) ? data : [data];
