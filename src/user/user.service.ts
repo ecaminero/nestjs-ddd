@@ -1,25 +1,22 @@
 import { Injectable, Inject } from '@nestjs/common';
-import { Model } from 'mongoose';
-import { User } from './interface/user.entity';
+import { User } from './entity/user.entity';
 import { CreateUserDto } from './dto/create-user.dto';
-import { USER_MODEL_PROVIDER } from '../constants';
+import { UserRepository } from './repository/user.repository';
 
 // Se inyecta el repo en el servicio
 @Injectable()
 export class UserService {
-  constructor(@Inject(USER_MODEL_PROVIDER) private readonly userModel: Model<User>) {}
+  constructor(private readonly userRepository: UserRepository) {}
 
   getHello(): string {
     return 'Hello World!';
   }
 
   async create(createUserDto: CreateUserDto): Promise<User> {
-    const user = new this.userModel(createUserDto);
-    return await user.save();
+    return await this.userRepository.create(createUserDto);
   }
 
-  async findAll(): Promise<User[]> {
-    const users = await this.userModel.findAll();
-    return users;
+  async find(): Promise<User[]> {
+    return await this.userRepository.find();
   }
 }

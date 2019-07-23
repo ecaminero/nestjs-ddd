@@ -1,9 +1,13 @@
+import * as uuid from 'uuid/v4';
 import { Column, Model, Table, DataType } from 'sequelize-typescript';
+import { ForeignKey, HasMany, BeforeCreate } from 'sequelize-typescript';
+import { AdressModel } from './address.model';
+import { ShoppingModel } from './shopping.model';
 
 @Table
-export class UserEntity extends Model<UserEntity> {
+export class UserModel extends Model<UserModel> {
 
-  @Column({type: DataType.UUID, primaryKey: true})
+  @Column({type: DataType.UUIDV4, primaryKey: true})
   // tslint:disable-next-line: variable-name
   _id: string;
 
@@ -43,30 +47,21 @@ export class UserEntity extends Model<UserEntity> {
   @Column
   ipv6: string;
 
-  @Column
-  id: string;
-
   @Column(DataType.JSON)
   finance: {
     account: string;
     accountName: string;
   };
 
-  @Column(DataType.JSON)
-  address: {
-    zipCode: string;
-    city: string;
-    streetAddress: string;
-    country: string;
-  };
+  @ForeignKey(() => AdressModel)
+  @Column({type: DataType.UUIDV4})
+  address: string;
 
-  @Column(DataType.JSON)
-  shopping: [{
-      productName: string,
-      price: string,
-      productAdjective: string,
-      productMaterial: string,
-      product: string,
-      department: string,
-  }];
+  @HasMany(() => ShoppingModel)
+  shoppings: ShoppingModel[];
+
+  @BeforeCreate
+  static makeUpperCase(instance: UserModel) {
+    instance._id = uuid();
+  }
 }

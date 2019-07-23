@@ -1,20 +1,24 @@
 import * as faker from 'faker';
+import * as uuid from 'uuid/v4';
+import { has } from 'lodash';
 import { Test } from '@nestjs/testing';
 import { Model } from 'mongoose';
 import { TestingModule } from '@nestjs/testing/testing-module';
-import { UserController } from '../controller/user.controller';
-import { UserService } from './../user.service';
-import { User } from '../interface/user.entity';
-import { UserEntity } from '../model/user.model';
-import { USER_MODEL_PROVIDER } from './../../constants';
-import * as uuid from 'uuid/v4';
+import { USER_MODEL_PROVIDER } from '../../constants';
+import { CreateUserDto } from '../dto/create-user.dto';
+import { UserService } from '../user.service';
+import { User } from '../entity/user.entity';
+import { UserModel } from '../model/user.model';
+import { UserRepository } from '../repository/user.repository';
 
 describe('User Controller', () => {
-  let controller: UserController;
   let service: UserService;
-  const userModel: Model<User> = UserEntity;
+  let userModel: Model<User> = UserModel;
+  let repository: UserRepository;
 
   beforeAll(async () => {
+    userModel = UserModel;
+
     const userProviders = {
       provide: USER_MODEL_PROVIDER,
       useValue: userModel,
@@ -22,24 +26,24 @@ describe('User Controller', () => {
 
     const module: TestingModule = await Test
       .createTestingModule({
-        controllers: [UserController],
         providers: [
           UserService,
+          UserRepository,
           userProviders,
         ],
       })
       .compile();
 
-    controller = module.get<UserController>(UserController);
     service = module.get<UserService>(UserService);
+    repository = module.get<UserRepository>(UserRepository);
   });
 
-  it('should get users', async () => {
+  it('should get all user users', async () => {
     const randomNumber = Math.floor(Math.random() * 10);
-    const userList: User[] = [];
+    const userList: CreateUserDto[] = [];
 
     for (let index = 0; index <= randomNumber; index++) {
-      const result: User = {
+      const result: CreateUserDto = {
         name: faker.name.findName(),
         lastname: faker.name.lastName(),
         age: faker.random.number(),
@@ -63,6 +67,7 @@ describe('User Controller', () => {
           country: faker.address.country(),
        },
         shopping: [{
+          id: faker.random.uuid(),
           productName: faker.commerce.productName(),
           price: faker.commerce.price(),
           productAdjective: faker.commerce.productAdjective(),
@@ -72,10 +77,10 @@ describe('User Controller', () => {
         }],
       };
       userList.push(result);
-    };
+    }
 
     jest.spyOn(service, 'findAll').mockImplementation(async () => userList );
-    const data = await controller.findAll();
+    const data = await service.findAll();
     expect(data.length).toBe(userList.length);
     data.forEach((element, index) => {
       expect(element.id).toBe(userList[index].id);
