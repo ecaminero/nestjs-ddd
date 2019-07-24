@@ -42,6 +42,7 @@ describe('User Controller', () => {
 
     for (let index = 0; index <= randomNumber; index++) {
       const result: CreateUserDto = {
+        _id: faker.random.uuid(),
         name: faker.name.findName(),
         lastname: faker.name.lastName(),
         age: faker.random.number(),
@@ -53,7 +54,6 @@ describe('User Controller', () => {
         jobTitle: faker.name.jobTitle(),
         avatar: faker.image.avatar(),
         ipv6: faker.internet.ipv6(),
-        id: faker.random.uuid(),
         finance: {
           account: faker.finance.account(),
           accountName: faker.finance.accountName(),
@@ -65,7 +65,7 @@ describe('User Controller', () => {
           country: faker.address.country(),
        },
         shopping: [{
-          id: faker.random.uuid(),
+          _id: faker.random.uuid(),
           productName: faker.commerce.productName(),
           price: faker.commerce.price(),
           productAdjective: faker.commerce.productAdjective(),
@@ -81,7 +81,7 @@ describe('User Controller', () => {
     const data = await controller.findAll();
     expect(data.length).toBe(userList.length);
     data.forEach((element, index) => {
-      expect(element.id).toBe(userList[index].id);
+      expect(element._id).toBe(userList[index]._id);
     });
   });
 

@@ -6,7 +6,7 @@ jest.setTimeout(30000);
 
 describe('AppController (e2e)', () => {
   let app: any;
-  const cantRequest: number = 5000;
+  const cantRequest: number = 10;
   function generateData(limit: number) {
     const userList = [];
 
@@ -72,7 +72,7 @@ describe('AppController (e2e)', () => {
 
   it('/ (GET)', () => {
     return request(app.getHttpServer())
-      .get('/')
+      .get('/hello')
       .expect(200)
       .expect('Hello World!');
   });
