@@ -7,7 +7,7 @@
 POST http://{{host}}/create HTTP/1.1
 Content-Type: {{contentType}}
 
- {
+{
     "name" : "Mertie Beier Sr.",
     "lastname" : "Ziemann",
     "age" : 90402,
@@ -19,9 +19,8 @@ Content-Type: {{contentType}}
     "jobTitle" : "Direct Infrastructure Assistant",
     "avatar" : "https://s3.amazonaws.com/uifaces/faces/twitter/coderdiaz/128.jpg",
     "ipv6" : "4e82:20d3:2695:6a75:a5a4:0ad9:bc26:2e35",
-    "id" : "cb9d7866-a355-4c6c-9a69-4d8a7d97620b",
     "finance" : {
-        "account" : "",
+        "account" : "23856570",
         "accountName" : "Money Market Account"
     },
     "address" : {
