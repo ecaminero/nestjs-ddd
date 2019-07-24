@@ -16,7 +16,7 @@ export class UserService {
     return await this.userRepository.create(createUserDto);
   }
 
-  async findAll(): Promise<User[]> {
+  async find(): Promise<User[]> {
     return await this.userRepository.find();
   }
 }

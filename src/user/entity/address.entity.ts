@@ -1,12 +1,11 @@
-
 import { IsNotEmpty } from 'class-validator';
 
-export class Finance {
+export class Address {
   @IsNotEmpty()
   // tslint:disable-next-line: variable-name
   readonly _id?: string;
-
-  @IsNotEmpty()
-  account: string;
-  accountName: string;
+  zipCode: string;
+  city: string;
+  streetAddress: string;
+  country: string;
 }

@@ -14,7 +14,7 @@ export class UserController {
 
   @Get('/all')
   findAll(): Promise<User[]> {
-    return this.userService.findAll();
+    return this.userService.find();
   }
 
   @Post('/create')

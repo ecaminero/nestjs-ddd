@@ -1,11 +1,7 @@
-import * as faker from 'faker';
-import * as uuid from 'uuid/v4';
-import { has } from 'lodash';
 import { Test } from '@nestjs/testing';
 import { Model } from 'mongoose';
 import { TestingModule } from '@nestjs/testing/testing-module';
 import { USER_MODEL_PROVIDER } from '../../constants';
-import { CreateUserDto } from '../dto/create-user.dto';
 import { UserService } from '../user.service';
 import { User } from '../entity/user.entity';
 import { UserModel } from '../model/user.model';
@@ -39,7 +35,6 @@ describe('User Controller', () => {
   });
 
   it('should return Hello World!', async () => {
-
     const data = await service.getHello();
     expect(data).toBeDefined();
     expect(data).toBe('Hello World!');

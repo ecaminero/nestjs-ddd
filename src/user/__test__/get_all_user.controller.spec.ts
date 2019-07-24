@@ -1,8 +1,6 @@
 import * as faker from 'faker';
-import * as uuid from 'uuid/v4';
 import { Test } from '@nestjs/testing';
 import { Model } from 'mongoose';
-import { has } from 'lodash';
 import { TestingModule } from '@nestjs/testing/testing-module';
 import { UserController } from '../controller/user.controller';
 import { UserService } from '../user.service';
@@ -55,7 +53,7 @@ describe('User Controller', () => {
         jobTitle: faker.name.jobTitle(),
         avatar: faker.image.avatar(),
         ipv6: faker.internet.ipv6(),
-        id: uuid(),
+        id: faker.random.uuid(),
         finance: {
           account: faker.finance.account(),
           accountName: faker.finance.accountName(),
@@ -79,7 +77,7 @@ describe('User Controller', () => {
       userList.push(result);
     }
 
-    jest.spyOn(service, 'findAll').mockImplementation(async () => userList );
+    jest.spyOn(service, 'find').mockImplementation(async () => userList );
     const data = await controller.findAll();
     expect(data.length).toBe(userList.length);
     data.forEach((element, index) => {
