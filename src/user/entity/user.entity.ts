@@ -5,9 +5,8 @@ import { Finance } from './finance.entity';
 import { Type } from 'class-transformer';
 
 export class User {
-  @IsNotEmpty()
   // tslint:disable-next-line: variable-name
-  _id?: string;
+  readonly _id?: string;
 
   @IsString()
   @IsNotEmpty()

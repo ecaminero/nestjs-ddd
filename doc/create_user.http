@@ -4,7 +4,7 @@
 @contentType = application/json
 
 ### Create Uuser
-POST http://{{host}}/create HTTP/1.1
+POST http://{{host}} HTTP/1.1
 Content-Type: {{contentType}}
 
 {
