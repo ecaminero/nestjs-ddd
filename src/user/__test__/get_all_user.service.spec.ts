@@ -1,35 +1,38 @@
 import * as faker from 'faker';
 import * as uuid from 'uuid/v4';
-import { has } from 'lodash';
 import { Test } from '@nestjs/testing';
-import { Model } from 'mongoose';
 import { TestingModule } from '@nestjs/testing/testing-module';
 import { USER_MODEL_PROVIDER } from '../../constants';
+import { ADDRESS_MODEL_PROVIDER } from '../../constants';
+import { SHOPPING_MODEL_PROVIDER } from '../../constants';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { UserService } from '../user.service';
-import { User } from '../entity/user.entity';
 import { UserModel } from '../model/user.model';
+import { ShoppingModel } from '../model/shopping.model';
+import { AdressModel } from '../model/address.model';
 import { UserRepository } from '../repository/user.repository';
+import { AddressRepository } from '../repository/address.repository';
+import { ShoppingRepository } from '../repository/shopping.repository';
 
 describe('User Controller', () => {
   let service: UserService;
-  let userModel: Model<User> = UserModel;
   let repository: UserRepository;
 
   beforeAll(async () => {
-    userModel = UserModel;
-
-    const userProviders = {
-      provide: USER_MODEL_PROVIDER,
-      useValue: userModel,
-    };
+    const providers = [
+      { provide: USER_MODEL_PROVIDER, useValue: UserModel },
+      { provide: SHOPPING_MODEL_PROVIDER, useValue: ShoppingModel },
+      { provide: ADDRESS_MODEL_PROVIDER, useValue: AdressModel },
+    ];
 
     const module: TestingModule = await Test
       .createTestingModule({
         providers: [
           UserService,
           UserRepository,
-          userProviders,
+          ShoppingRepository,
+          AddressRepository,
+          ...providers,
         ],
       })
       .compile();
@@ -44,6 +47,7 @@ describe('User Controller', () => {
 
     for (let index = 0; index <= randomNumber; index++) {
       const result: CreateUserDto = {
+        _id: uuid(),
         name: faker.name.findName(),
         lastname: faker.name.lastName(),
         age: faker.random.number(),
@@ -55,7 +59,6 @@ describe('User Controller', () => {
         jobTitle: faker.name.jobTitle(),
         avatar: faker.image.avatar(),
         ipv6: faker.internet.ipv6(),
-        id: uuid(),
         finance: {
           account: faker.finance.account(),
           accountName: faker.finance.accountName(),
@@ -67,7 +70,7 @@ describe('User Controller', () => {
           country: faker.address.country(),
        },
         shopping: [{
-          id: faker.random.uuid(),
+          _id: faker.random.uuid(),
           productName: faker.commerce.productName(),
           price: faker.commerce.price(),
           productAdjective: faker.commerce.productAdjective(),
@@ -79,11 +82,11 @@ describe('User Controller', () => {
       userList.push(result);
     }
 
-    jest.spyOn(service, 'findAll').mockImplementation(async () => userList );
-    const data = await service.findAll();
+    jest.spyOn(service, 'find').mockImplementation(async () => userList );
+    const data = await service.find();
     expect(data.length).toBe(userList.length);
     data.forEach((element, index) => {
-      expect(element.id).toBe(userList[index].id);
+      expect(element._id).toBe(userList[index]._id);
     });
   });
 

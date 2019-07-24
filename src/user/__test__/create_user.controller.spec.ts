@@ -1,28 +1,30 @@
 import * as faker from 'faker';
-import * as uuid from 'uuid/v4';
 import { Test } from '@nestjs/testing';
-import { Model } from 'mongoose';
 import { has } from 'lodash';
 import { TestingModule } from '@nestjs/testing/testing-module';
-import { UserController } from '../controller/user.controller';
-import { UserService } from '../user.service';
-import { CreateUserDto } from '../dto/create-user.dto';
-import { UserModel } from '../model/user.model';
-import { User } from '../entity/user.entity';
 import { USER_MODEL_PROVIDER } from '../../constants';
+import { ADDRESS_MODEL_PROVIDER } from '../../constants';
+import { SHOPPING_MODEL_PROVIDER } from '../../constants';
+import { CreateUserDto } from '../dto/create-user.dto';
+import { UserService } from '../user.service';
+import { UserModel } from '../model/user.model';
+import { ShoppingModel } from '../model/shopping.model';
+import { AdressModel } from '../model/address.model';
 import { UserRepository } from '../repository/user.repository';
+import { AddressRepository } from '../repository/address.repository';
+import { ShoppingRepository } from '../repository/shopping.repository';
+import { UserController } from './../controller/user.controller';
 
 describe('User Controller', () => {
   let controller: UserController;
   let service: UserService;
-  const userModel: Model<User> = UserModel;
-  const randomNumber = Math.floor(Math.random() * 10);
 
   beforeAll(async () => {
-    const userProviders = {
-      provide: USER_MODEL_PROVIDER,
-      useValue: userModel,
-    };
+    const providers = [
+      { provide: USER_MODEL_PROVIDER, useValue: UserModel },
+      { provide: SHOPPING_MODEL_PROVIDER, useValue: ShoppingModel },
+      { provide: ADDRESS_MODEL_PROVIDER, useValue: AdressModel },
+    ];
 
     const module: TestingModule = await Test
       .createTestingModule({
@@ -30,7 +32,9 @@ describe('User Controller', () => {
         providers: [
           UserService,
           UserRepository,
-          userProviders,
+          ShoppingRepository,
+          AddressRepository,
+          ...providers,
         ],
       })
       .compile();
@@ -39,8 +43,9 @@ describe('User Controller', () => {
     service = module.get<UserService>(UserService);
   });
 
-  fit('should create an user', async () => {
+  it('should create an user', async () => {
     const user: CreateUserDto = {
+      _id: faker.random.uuid(),
       name: faker.name.findName(),
       lastname: faker.name.lastName(),
       age: faker.random.number(),
@@ -52,7 +57,6 @@ describe('User Controller', () => {
       jobTitle: faker.name.jobTitle(),
       avatar: faker.image.avatar(),
       ipv6: faker.internet.ipv6(),
-      id: uuid(),
       finance: {
         account: faker.finance.account(),
         accountName: faker.finance.accountName(),
@@ -64,7 +68,7 @@ describe('User Controller', () => {
         country: faker.address.country(),
       },
       shopping: [{
-        id: faker.random.uuid(),
+        _id: faker.random.uuid(),
         productName: faker.commerce.productName(),
         price: faker.commerce.price(),
         productAdjective: faker.commerce.productAdjective(),
@@ -76,8 +80,8 @@ describe('User Controller', () => {
 
     jest.spyOn(service, 'create').mockImplementation(async () => user );
     const data = await controller.create(user);
-    expect(has(data , 'id')).toBeTruthy();
-    expect(data.id).toBeDefined();
+    expect(has(data , '_id')).toBeTruthy();
+    expect(data._id).toBeDefined();
     Object.keys(data).forEach((key) => {
       expect(data[key]).toBe(user[key]);
     });

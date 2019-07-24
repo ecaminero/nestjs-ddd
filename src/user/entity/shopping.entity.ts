@@ -3,7 +3,7 @@ import { IsNotEmpty, IsString} from 'class-validator';
 export class Shopping {
   @IsNotEmpty()
   // tslint:disable-next-line: variable-name
-  _id: string;
+  _id?: string;
 
   @IsString()
   @IsNotEmpty()

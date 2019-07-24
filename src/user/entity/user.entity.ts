@@ -7,7 +7,7 @@ import { Type } from 'class-transformer';
 export class User {
   @IsNotEmpty()
   // tslint:disable-next-line: variable-name
-  _id: string;
+  _id?: string;
 
   @IsString()
   @IsNotEmpty()

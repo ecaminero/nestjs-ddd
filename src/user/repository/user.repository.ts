@@ -1,5 +1,4 @@
 import { Injectable, Inject } from '@nestjs/common';
-import * as sequelize from 'sequelize';
 import { Model } from 'mongoose';
 import { User } from '../entity/user.entity';
 import { AddressRepository } from './address.repository';
