@@ -3,5 +3,6 @@
 @host = {{hostname}}:{{port}}
 @contentType = application/json
 
-### Create Uuser
-GET http://{{host}}/hello HTTP/1.1
+
+## health check
+GET http://{{host}}/health HTTP/1.1

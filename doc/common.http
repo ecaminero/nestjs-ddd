@@ -1,0 +1,9 @@
+@hostname = localhost
+@port = 4000
+@host = {{hostname}}:{{port}}
+@contentType = application/json
+
+### Create Uuser
+GET http://{{host}}/hello HTTP/1.1
+
+

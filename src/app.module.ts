@@ -5,9 +5,15 @@ import { DatabaseModule } from './infrastructure/database/database.module';
 import { modelProviders } from './infrastructure/model/model.provider';
 import { UserRepository } from './infrastructure/repository/user.repository';
 import { LoggerMiddleware } from './app/middlewere/logger.middleware';
+import { TerminusModule } from '@nestjs/terminus';
+import { TerminusOptionsService } from './infrastructure/health/terminus-options.check';
+
+const HealthModule = TerminusModule.forRootAsync({
+  useClass: TerminusOptionsService,
+});
 
 @Module({
-  imports: [DatabaseModule],
+  imports: [DatabaseModule, HealthModule],
   controllers: [UserController],
   providers: [
     UserService,
@@ -18,7 +24,7 @@ import { LoggerMiddleware } from './app/middlewere/logger.middleware';
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
-      .apply( LoggerMiddleware)
+      .apply(LoggerMiddleware)
       .forRoutes(UserController);
   }
 }
