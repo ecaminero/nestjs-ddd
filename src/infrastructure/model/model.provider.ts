@@ -1,8 +1,8 @@
 import { Connection } from 'mongoose';
-import { UserModel } from './model/user.model';
-import { USER_MODEL_PROVIDER, DB_PROVIDER } from '../constants';
+import { UserModel } from './user.model';
+import { USER_MODEL_PROVIDER, DB_PROVIDER } from '../../constants';
 
-export const userProviders = [{
+export const modelProviders = [{
   provide: USER_MODEL_PROVIDER,
   useFactory: (connection: Connection) => {
     return connection.model('User', UserModel);

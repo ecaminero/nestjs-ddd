@@ -3,12 +3,12 @@ import { Test } from '@nestjs/testing';
 import { Model } from 'mongoose';
 import { TestingModule } from '@nestjs/testing/testing-module';
 import { UserController } from '../controller/user.controller';
-import { UserService } from '../user.service';
+import { UserService } from '../../domain/service/user.service';
 import { CreateUserDto } from '../dto/create-user.dto';
-import { UserModel } from '../model/user.model';
-import { User } from '../entity/user.entity';
+import { UserModel } from '../../infrastructure/model/user.model';
+import { User } from '../../domain/entities/user.entity';
 import { USER_MODEL_PROVIDER } from '../../constants';
-import { UserRepository } from '../repository/user.repository';
+import { UserRepository } from '../../infrastructure/repository/user.repository';
 
 describe('User Controller', () => {
   let controller: UserController;
@@ -42,7 +42,6 @@ describe('User Controller', () => {
 
     for (let index = 0; index <= randomNumber; index++) {
       const result: CreateUserDto = {
-        _id: faker.random.uuid(),
         name: faker.name.findName(),
         lastname: faker.name.lastName(),
         age: faker.random.number(),
