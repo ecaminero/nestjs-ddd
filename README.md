@@ -18,32 +18,50 @@ git clone git@github.com:ecaminero/nestjs-ddd.git
 ### Structure
 ```
 ├── src
-│   ├── app.module.ts
-│   ├── constants.ts
-│   ├── database
-│   │   ├── database.module.ts
-│   │   └── database.providers.ts
-│   ├── main.ts
-│   └── user
-│       ├── __test__
-│       │   ├── *.controller.spec.ts
-│       │   ├── *.service.spec.ts
-│       ├── controller
-│       │   ├── *.controller.ts
-│       ├── dto
-│       │   └── *.dto.ts
-│       ├── entity
-│       │   ├── *.entity.ts
-│       ├── model 
-│       │   └── *.model.ts
-│       ├── repository
-│       │   └── *.repository.ts
-│       ├── user.module.ts
-│       ├── user.provider.ts
-│       └── user.service.ts
+│   ├── app
+│   │   ├── __test__
+│   │   │   ├── create_user.controller.spec.ts
+│   │   │   └── get_all_user.controller.spec.ts
+│   │   ├── controller
+│   │   │   ├── message.controller.ts
+│   │   │   └── user.controller.ts
+│   │   ├── dto
+│   │   │   └── create-user.dto.ts
+│   │   ├── interceptors
+│   │   │   └── logging.interceptor.ts
+│   │   └── middlewere
+│   │       └── logger.middleware.ts
+│   ├── app.module.ts
+│   ├── constants.ts
+│   ├── domain
+│   │   ├── __test__
+│   │   │   ├── create_user.service.spec.ts
+│   │   │   └── get_hello.service.spec.ts
+│   │   ├── entities
+│   │   │   ├── address.entity.ts
+│   │   │   ├── finance.entity.ts
+│   │   │   ├── shopping.entity.ts
+│   │   │   └── user.entity.ts
+│   │   ├── interfaces
+│   │   │   └── TODO\
+│   │   └── service
+│   │       ├── logger.service.ts
+│   │       └── user.service.ts
+│   ├── infrastructure
+│   │   ├── database
+│   │   │   ├── database.module.ts
+│   │   │   └── database.providers.ts
+│   │   ├── health
+│   │   │   └── terminus-options.check.ts
+│   │   ├── model
+│   │   │   ├── model.provider.ts
+│   │   │   └── user.model.ts
+│   │   └── repository
+│   │       └── user.repository.ts
+│   └── main.ts
 ├── test
-│   ├── app.e2e-spec.ts
-│   └── jest-e2e.json
+│   ├── app.e2e-spec.ts
+│   └── jest-e2e.json
 ├── tsconfig.build.json
 ├── tsconfig.json
 └── tslint.json
