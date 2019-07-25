@@ -1,7 +1,7 @@
 import { Controller } from '@nestjs/common';
 
 @Controller()
-export class MessageController {
+export class UserEventController {
   constructor() {}
 
   get(): string {

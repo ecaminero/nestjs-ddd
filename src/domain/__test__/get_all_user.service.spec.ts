@@ -1,23 +1,22 @@
 import * as faker from 'faker';
 import { Test } from '@nestjs/testing';
 import { Model } from 'mongoose';
-import { has } from 'lodash';
 import { TestingModule } from '@nestjs/testing/testing-module';
-import { UserController } from '../controller/user.controller';
-import { UserService } from '../../domain/service/user.service';
-import { CreateUserDto } from '../dto/create-user.dto';
-import { UserModel } from '../../infrastructure/model/user.model';
-import { User } from '../../domain/entities/user.entity';
 import { USER_MODEL_PROVIDER } from '../../constants';
+import { UserService } from '../service/user.service';
+import { User } from '../entities/user.entity';
+import { UserModel } from '../../infrastructure/model/user.model';
 import { UserRepository } from '../../infrastructure/repository/user.repository';
 
 describe('User Controller', () => {
-  let controller: UserController;
   let service: UserService;
-  const userModel: Model<User> = UserModel;
+  let userModel: Model<User> = UserModel;
+  let repository: UserRepository;
   const randomNumber = Math.floor(Math.random() * 10);
 
   beforeAll(async () => {
+    userModel = UserModel;
+
     const userProviders = {
       provide: USER_MODEL_PROVIDER,
       useValue: userModel,
@@ -25,7 +24,6 @@ describe('User Controller', () => {
 
     const module: TestingModule = await Test
       .createTestingModule({
-        controllers: [UserController],
         providers: [
           UserService,
           UserRepository,
@@ -34,15 +32,16 @@ describe('User Controller', () => {
       })
       .compile();
 
-    controller = module.get<UserController>(UserController);
     service = module.get<UserService>(UserService);
+    repository = module.get<UserRepository>(UserRepository);
   });
 
-  it('should return all user registered', async () => {
-    const userList: CreateUserDto[] = [];
+  it('should create a user', async () => {
+    const userList: User[] = [];
 
     for (let index = 0; index <= randomNumber; index++) {
-      const result: CreateUserDto = {
+      const user = {
+        _id: faker.random.uuid(),
         name: faker.name.findName(),
         lastname: faker.name.lastName(),
         age: faker.random.number(),
@@ -74,16 +73,19 @@ describe('User Controller', () => {
           department: faker.commerce.department(),
         }],
       };
-      userList.push(result);
+      userList.push(user);
     }
 
-    jest.spyOn(service, 'find').mockImplementation(async () => userList );
-    const data = await controller.findAll();
+    jest.spyOn(repository, 'find').mockImplementation(async () => userList);
+    const data = await service.find();
     expect(data.length).toBe(userList.length);
     data.forEach((element, index) => {
-      expect(has(element , '_id')).toBeTruthy();
       expect(element.name).toBe(userList[index].name);
     });
   });
-
+  it('should return Hello World!', async () => {
+    const data = await service.getHello();
+    expect(data).toBeDefined();
+    expect(data).toBe('Hello World!');
+  });
 });

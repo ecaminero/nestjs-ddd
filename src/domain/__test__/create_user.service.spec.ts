@@ -1,5 +1,5 @@
 import * as faker from 'faker';
-import { has } from 'lodash';
+import { cloneDeep } from 'lodash';
 import { Test } from '@nestjs/testing';
 import { Model } from 'mongoose';
 import { TestingModule } from '@nestjs/testing/testing-module';
@@ -38,8 +38,8 @@ describe('User Controller', () => {
   });
 
   it('should create a user', async () => {
-    const result: CreateUserDto = {
-      // _id: faker.random.uuid(),
+    const user = {
+      _id: faker.random.uuid(),
       name: faker.name.findName(),
       lastname: faker.name.lastName(),
       age: faker.random.number(),
@@ -72,12 +72,13 @@ describe('User Controller', () => {
       }],
     };
 
-    jest.spyOn(repository, 'create').mockImplementation(async () => result );
-    const data = await service.create(result);
-    expect(has(data , '_id')).toBeTruthy();
+    const newUser = cloneDeep(user);
+    jest.spyOn(repository, 'create').mockImplementation(async () => user);
+    const data = await service.create(newUser);
+    expect(data).toBeDefined();
     expect(data._id).toBeDefined();
     Object.keys(data).forEach((key) => {
-      expect(data[key]).toBe(result[key]);
+      expect(data[key]).toBe(user[key]);
     });
   });
 });
