@@ -23,7 +23,7 @@ git clone git@github.com:ecaminero/nestjs-ddd.git
 │   │   │   ├── create_user.controller.spec.ts
 │   │   │   └── get_all_user.controller.spec.ts
 │   │   ├── controller
-│   │   │   ├── message.controller.ts
+│   │   │   ├── user.event.controller.ts
 │   │   │   └── user.controller.ts
 │   │   ├── dto
 │   │   │   └── create-user.dto.ts

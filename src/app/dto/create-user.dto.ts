@@ -8,6 +8,9 @@ export class CreateUserDto  {
   @IsString()
   @IsNotEmpty()
   name: string;
+
+  @IsString()
+  @IsNotEmpty()
   lastname: string;
 
   @IsNumber()
@@ -37,6 +40,7 @@ export class CreateUserDto  {
 
   @IsString()
   ipv6: string;
+
   @Type(() => Finance)
   finance: Finance;
 
