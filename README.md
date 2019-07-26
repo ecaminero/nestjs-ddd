@@ -7,7 +7,7 @@ If you want more documentation of it, click here [Nest](https://github.com/nestj
 ## Branch Definitions
  * **master**: Flat structure with mongo connection
  * **flat-structure-sql**: Flat structure with connection to sqlite can be easily changed to any connection that allows sequelizejs
- * **ddd-mongo**: [IN PROGRESS] Exagonal structure with mongo connection 
+ * **hexagonal-architecture**: Exagonal structure with mongo connection 
 
 ## Getting Started
 
