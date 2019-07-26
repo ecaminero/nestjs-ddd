@@ -39,10 +39,11 @@ describe('User Controller', () => {
   });
 
   it('should return all user registered', async () => {
-    const userList: CreateUserDto[] = [];
+    const userList: User[] = [];
 
     for (let index = 0; index <= randomNumber; index++) {
-      const result: CreateUserDto = {
+      const result: User = {
+        _id: faker.random.uuid(),
         name: faker.name.findName(),
         lastname: faker.name.lastName(),
         age: faker.random.number(),
@@ -59,6 +60,7 @@ describe('User Controller', () => {
           accountName: faker.finance.accountName(),
        },
         address: {
+          _id: faker.random.uuid(),
           zipCode: faker.address.zipCode(),
           city: faker.address.city(),
           streetAddress: faker.address.streetAddress(),
@@ -84,6 +86,12 @@ describe('User Controller', () => {
       expect(has(element , '_id')).toBeTruthy();
       expect(element.name).toBe(userList[index].name);
     });
+  });
+
+  it('should return Hello word', async () => {
+    const data = await controller.get();
+    expect(data).toBeDefined();
+    expect(data).toBe('Hello World!');
   });
 
 });

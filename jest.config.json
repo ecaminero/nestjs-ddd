@@ -1,3 +1,5 @@
 {
-  "preset": "@shelf/jest-mongodb"
+  "coveragePathIgnorePatterns": [
+    "(.test)\\.(ts|tsx|js)$"
+  ]
 }
