@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { User } from '../entities/user.entity';
-import { CreateUserDto } from '../../app/dto/create-user.dto';
+import { CreateUserDto } from '../../application/dto/create-user.dto';
 import { UserRepository } from '../../infrastructure/repository/user.repository';
 
 // Se inyecta el repo en el servicio
