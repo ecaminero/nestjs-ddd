@@ -4,7 +4,7 @@ import { Test } from '@nestjs/testing';
 import { Model } from 'mongoose';
 import { TestingModule } from '@nestjs/testing/testing-module';
 import { USER_MODEL_PROVIDER } from '../../constants';
-import { CreateUserDto } from '../../app/dto/create-user.dto';
+import { CreateUserDto } from '../../application/dto/create-user.dto';
 import { UserService } from '../service/user.service';
 import { User } from '../entities/user.entity';
 import { UserModel } from '../../infrastructure/model/user.model';
