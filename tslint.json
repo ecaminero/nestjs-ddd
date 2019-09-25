@@ -15,5 +15,10 @@
     "object-literal-sort-keys": false,
     "no-console": false
   },
+  "paths": {
+    "@domain/*": ["src/domain/*"],
+    "@infrastructure/*": ["src/infrastructure/*"],
+    "@application/*": ["src/application/*"]
+  },
   "rulesDirectory": []
 }

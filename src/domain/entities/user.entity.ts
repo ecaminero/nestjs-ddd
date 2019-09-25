@@ -4,6 +4,20 @@ import { Address } from './address.entity';
 import { Finance } from './finance.entity';
 import { Type } from 'class-transformer';
 
+// tslint:disable-next-line: max-classes-per-file
+class Hal {
+  @Type(() => Object)
+  _link: {
+
+  };
+  
+  @Type(() => Object)
+  _embedded: {
+
+  };
+}
+
+// tslint:disable-next-line: max-classes-per-file
 export class User {
   // tslint:disable-next-line: variable-name
   readonly _id?: string;
@@ -40,7 +54,7 @@ export class User {
 
   @IsString()
   ipv6: string;
-
+  // tslint:disable-next-line: variable-name
   @Type(() => Finance)
   finance: Finance;
 

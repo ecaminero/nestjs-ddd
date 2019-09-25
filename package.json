@@ -31,6 +31,7 @@
     "class-validator": "^0.9.1",
     "dotenv": "^8.0.0",
     "lodash": "^4.17.14",
+    "module-alias": "^2.2.1",
     "moment": "^2.24.0",
     "mongoose": "^5.6.4",
     "reflect-metadata": "^0.1.12",
@@ -74,6 +75,18 @@
       "^.+\\.(t|j)s$": "ts-jest"
     },
     "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "moduleNameMapper": {
+      "@application(.*)$": "<rootDir>/application$1",
+      "@domain(.*)$": "<rootDir>/domain$1",
+      "@infrastructure(.*)$": "<rootDir>/infrastructure$1",
+      "@constants(.*)$": "<rootDir>/constants$1"
+    }
+  },
+  "_moduleAliases": {
+    "@root"      : ".",
+    "@domain": "dist/domain/*",
+    "@application": "dist/application/*",
+    "@infrastructure": "dist/infrastructure/*"
   }
 }

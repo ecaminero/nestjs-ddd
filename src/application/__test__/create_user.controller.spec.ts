@@ -5,7 +5,7 @@ import { has, cloneDeep } from 'lodash';
 import { TestingModule } from '@nestjs/testing/testing-module';
 import { UserController } from '../controller/user.controller';
 import { UserService } from '../../domain/service/user.service';
-import { UserModel } from '../../infrastructure/model/user.model';
+import { UserModel } from '../../infrastructure/models/user.model';
 import { User } from '../../domain/entities/user.entity';
 import { USER_MODEL_PROVIDER } from '../../constants';
 import { UserRepository } from '../../infrastructure/repository/user.repository';

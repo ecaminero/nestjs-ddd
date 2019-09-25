@@ -1,8 +1,8 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { Model } from 'mongoose';
-import { User } from '../../domain/entities/user.entity';
-import { CreateUserDto } from '../../application/dto/create-user.dto';
-import { USER_MODEL_PROVIDER } from '../../constants';
+import { User } from '@domain/entities/user.entity';
+import { CreateUserDto } from '@application/dto/create-user.dto';
+import { USER_MODEL_PROVIDER } from '@constants';
 
 // Se inyecta el repo en el servicio
 @Injectable()

@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, UseInterceptors } from '@nestjs/common';
-import { UserService } from '../../domain/service/user.service';
+import { UserService } from '@domain/service/user.service';
 import { CreateUserDto } from '../dto/create-user.dto';
-import { User } from '../../domain/entities/user.entity';
+import { User } from '@domain/entities/user.entity';
 import { LoggingInterceptor } from '../interceptors/logging.interceptor';
 
 @Controller()
@@ -11,6 +11,7 @@ export class UserController {
 
   @Get('/hello')
   get(): string {
+    console.log(this);
     return 'Hello World!';
   }
 

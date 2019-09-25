@@ -1,7 +1,7 @@
 import { IsNotEmpty, IsString, IsNumber} from 'class-validator';
-import { Shopping } from '../../domain/entities/shopping.entity';
-import { Address } from '../../domain/entities/address.entity';
-import { Finance } from '../../domain/entities/finance.entity';
+import { Shopping } from '@domain/entities/shopping.entity';
+import { Address } from '@domain/entities/address.entity';
+import { Finance } from '@domain/entities/finance.entity';
 import { Type } from 'class-transformer';
 
 /* istanbul ignore if  */
