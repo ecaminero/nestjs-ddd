@@ -1,23 +1,18 @@
 import { Controller, Get, Post, Body, UseInterceptors } from '@nestjs/common';
 import { UserService } from '@domain/service/user.service';
-import { CreateUserDto } from '../dto/create-user.dto';
-import { User } from '@domain/entities/user.entity';
-import { LoggingInterceptor } from '../interceptors/logging.interceptor';
+import { CreateUserDto } from '@application/dto/create-user.dto';
+import { User } from '@domain/entities/User';
+import { LoggingInterceptor } from '@application/interceptors/logging.interceptor';
 
+// UserController
 @Controller()
 @UseInterceptors(LoggingInterceptor)
-export class UserController {
+export class HelloController {
   constructor(private readonly userService: UserService) {}
 
   @Get('/hello')
   get(): string {
-    console.log(this);
     return 'Hello World!';
-  }
-
-  @Get('/all')
-  findAll(): Promise<User[]> {
-    return this.userService.find();
   }
 
   @Post('/')

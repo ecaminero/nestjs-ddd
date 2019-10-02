@@ -1,5 +1,5 @@
 import { Module , NestModule, MiddlewareConsumer } from '@nestjs/common';
-import { UserController } from './application/controller/user.controller';
+import { HelloController } from './application/controller/hello.controller';
 import { UserService } from './domain/service/user.service';
 import { DatabaseModule } from './infrastructure/database/database.module';
 import { modelProviders } from './infrastructure/models';
@@ -14,7 +14,7 @@ const HealthModule = TerminusModule.forRootAsync({
 
 @Module({
   imports: [DatabaseModule, HealthModule],
-  controllers: [UserController],
+  controllers: [HelloController],
   providers: [
     UserService,
     UserRepository,
@@ -25,6 +25,6 @@ export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(LoggerMiddleware)
-      .forRoutes(UserController);
+      .forRoutes(HelloController);
   }
 }

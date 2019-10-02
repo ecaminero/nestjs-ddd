@@ -17,37 +17,4 @@ export class CreateUserDto  {
   @IsNumber()
   @IsNotEmpty()
   age: number;
-
-  @IsString()
-  picture: string;
-
-  @IsString()
-  company: string;
-
-  @IsString()
-  email: string;
-
-  @IsString()
-  phone: string;
-
-  @IsString()
-  balance: string;
-
-  @IsString()
-  jobTitle: string;
-
-  @IsString()
-  avatar: string;
-
-  @IsString()
-  ipv6: string;
-
-  @Type(() => Finance)
-  finance: Finance;
-
-  @Type(() => Address)
-  address: Address;
-
-  @Type(() => Object)
-  shopping: [Shopping];
 }

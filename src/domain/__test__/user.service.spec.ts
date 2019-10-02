@@ -1,13 +1,15 @@
+import * as faker from 'faker';
+import { cloneDeep } from 'lodash';
 import { Test } from '@nestjs/testing';
 import { Model } from 'mongoose';
 import { TestingModule } from '@nestjs/testing/testing-module';
-import { USER_MODEL_PROVIDER } from '../../constants';
-import { UserService } from '../service/user.service';
-import { User } from '../entities/user.entity';
-import { UserModel } from '@infrastructure/models/user.model';
+import { USER_MODEL_PROVIDER } from '@constants';
+import { UserService } from '@domain/service/user.service';
+import { User } from '@domain/entities/User';
+import { UserModel } from '@infrastructure/models/User.model';
 import { UserRepository } from '@infrastructure/repository/user.repository';
 
-describe('User Controller', () => {
+describe('User Service', () => {
   let service: UserService;
   let userModel: Model<User> = UserModel;
   let repository: UserRepository;
@@ -34,9 +36,21 @@ describe('User Controller', () => {
     repository = module.get<UserRepository>(UserRepository);
   });
 
-  it('should return Hello World!', async () => {
-    const data = await service.getHello();
+  it('should create a user', async () => {
+    const user = {
+      _id: faker.random.uuid(),
+      name: faker.name.findName(),
+      lastname: faker.name.lastName(),
+      age: faker.random.number(),
+    };
+
+    const newUser = cloneDeep(user);
+    jest.spyOn(repository, 'create').mockImplementation(async () => user);
+    const data = await service.create(newUser);
     expect(data).toBeDefined();
-    expect(data).toBe('Hello World!');
+    expect(data._id).toBeDefined();
+    Object.keys(data).forEach((key) => {
+      expect(data[key]).toBe(user[key]);
+    });
   });
 });
