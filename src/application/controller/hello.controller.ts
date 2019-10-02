@@ -1,5 +1,5 @@
 import { Controller, Get, Post, Body, UseInterceptors } from '@nestjs/common';
-import { UserService } from '@domain/service/user.service';
+import { UserService } from '@domain/services/user.service';
 import { CreateUserDto } from '@application/dto/create-user.dto';
 import { User } from '@domain/entities/User';
 import { LoggingInterceptor } from '@application/interceptors/logging.interceptor';
@@ -13,6 +13,11 @@ export class HelloController {
   @Get('/hello')
   get(): string {
     return 'Hello World!';
+  }
+
+  @Get('/all')
+  async getAll(): Promise<User[]> {
+    return await this.userService.find();
   }
 
   @Post('/')

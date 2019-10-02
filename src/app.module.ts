@@ -1,6 +1,6 @@
 import { Module , NestModule, MiddlewareConsumer } from '@nestjs/common';
 import { HelloController } from './application/controller/hello.controller';
-import { UserService } from './domain/service/user.service';
+import { UserService } from './domain/services/user.service';
 import { DatabaseModule } from './infrastructure/database/database.module';
 import { modelProviders } from './infrastructure/models';
 import { UserRepository } from './infrastructure/repository/user.repository';

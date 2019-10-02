@@ -9,6 +9,7 @@ moduleAlias.addAliases({
   '@constants': path.format({dir: __dirname, name: 'constants'}),
 });
 
+// App modules
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { APP_PORT } from './constants';

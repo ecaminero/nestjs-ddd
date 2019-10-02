@@ -84,8 +84,9 @@
     }
   },
   "_moduleAliases": {
-    "@root"      : ".",
+    "@root": ".",
     "@domain": "dist/domain/*",
+    "@constants": "dist/constants",
     "@application": "dist/application/*",
     "@infrastructure": "dist/infrastructure/*"
   }

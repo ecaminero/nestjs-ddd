@@ -4,7 +4,7 @@ import { Model } from 'mongoose';
 import { has, cloneDeep } from 'lodash';
 import { TestingModule } from '@nestjs/testing/testing-module';
 import { HelloController } from '@application/controller/hello.controller';
-import { UserService } from '@domain/service/user.service';
+import { UserService } from '@domain/services/user.service';
 import { UserModel } from '@infrastructure/models/User.model';
 import { User } from '@domain/entities/User';
 import { USER_MODEL_PROVIDER } from '@constants';

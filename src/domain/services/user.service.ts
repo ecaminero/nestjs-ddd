@@ -6,17 +6,17 @@ import { UserRepository } from '@infrastructure/repository/user.repository';
 // Se inyecta el repo en el servicio
 @Injectable()
 export class UserService {
-  constructor(private readonly userRepository: UserRepository) {}
+  constructor(private readonly repository: UserRepository) {}
 
   getHello(): string {
     return 'Hello World!';
   }
 
   async create(createUserDto: CreateUserDto): Promise<User> {
-    return await this.userRepository.create(createUserDto);
+    return await this.repository.create(createUserDto);
   }
 
   async find(): Promise<User[]> {
-    return await this.userRepository.find();
+    return await this.repository.find();
   }
 }

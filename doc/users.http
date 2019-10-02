@@ -1,0 +1,18 @@
+@hostname = localhost
+@port = 4000
+@host = {{hostname}}:{{port}}
+@contentType = application/json
+
+### Create Uuser
+POST http://{{host}} HTTP/1.1
+Content-Type: {{contentType}}
+
+{
+    "name" : "Mertie Beier Sr.",
+    "lastname" : "Ziemann",
+    "age" : 90402
+}
+
+
+### Create Uuser
+GET http://{{host}}/all HTTP/1.1
