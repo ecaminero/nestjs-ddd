@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { User } from '@domain/entities/User';
-import { UserModel } from '@infrastructure/models/User.model';
+import { UserModel } from '@infrastructure/models/user.model';
 import { CreateUserDto } from '@application/dto/create-user.dto';
 import { USER_MODEL_PROVIDER } from '@constants';
 
