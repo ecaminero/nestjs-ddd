@@ -1,8 +1,14 @@
 
-# NestJs with DDD
-
+# NestJs Clean Arquitecture
+Mutation test - stiker 
 This is an example of using DDD with nestjs, only for proof of concept and framework study
 If you want more documentation of it, click here [Nest](https://github.com/nestjs/nest) 
+
+[A quick introduction to clean architecture](https://www.freecodecamp.org/news/a-quick-introduction-to-clean-architecture-990c014448d2/)
+
+![alt text](https://cdn-media-1.freecodecamp.org/images/oVVbTLR5gXHgP8Ehlz1qzRm5LLjX9kv2Zri6)
+
+  
 
 ## Branch Definitions
  * **master**: Flat structure with mongo connection
